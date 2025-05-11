@@ -1,0 +1,6 @@
+C:\Users\kostyan\Documents\Xtorage\MultiLoader\MultiLoader\MultiLoader\x64\Debug\MultiLoader.vcxproj.AssemblyReference.cache
+C:\Users\kostyan\Documents\Xtorage\MultiLoader\MultiLoader\MultiLoader\x64\Debug\MultiLoader.MultiLoader.resources
+C:\Users\kostyan\Documents\Xtorage\MultiLoader\MultiLoader\MultiLoader\x64\Debug\MultiLoader.vcxproj.GenerateResource.cache
+C:\Xtorage\MultiLoader\MultiLoader\MultiLoader\x64\Debug\MultiLoader.vcxproj.AssemblyReference.cache
+C:\Xtorage\MultiLoader\MultiLoader\MultiLoader\x64\Debug\MultiLoader.MultiLoader.resources
+C:\Xtorage\MultiLoader\MultiLoader\MultiLoader\x64\Debug\MultiLoader.vcxproj.GenerateResource.cache
