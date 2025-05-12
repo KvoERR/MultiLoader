@@ -45,9 +45,6 @@ namespace MultiLoader {
 		}
 	protected:
 
-	private: System::Windows::Forms::TabControl^ tabControl1;
-	private: System::Windows::Forms::TabPage^ tabPage1;
-	private: System::Windows::Forms::TabPage^ tabPage2;
 	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
 	private: System::Windows::Forms::Button^ ML_button;
 	private: System::Windows::Forms::CheckBox^ checkBox_yt;
@@ -73,8 +70,6 @@ namespace MultiLoader {
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
-			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
-			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
 			this->tag_button = (gcnew System::Windows::Forms::Button());
 			this->tag_text = (gcnew System::Windows::Forms::TextBox());
 			this->checkBox_pl = (gcnew System::Windows::Forms::CheckBox());
@@ -93,53 +88,9 @@ namespace MultiLoader {
 			this->checkBox_ya = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox_yt = (gcnew System::Windows::Forms::CheckBox());
 			this->ML_button = (gcnew System::Windows::Forms::Button());
-			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->openFileDialog2 = (gcnew System::Windows::Forms::OpenFileDialog());
-			this->tabControl1->SuspendLayout();
-			this->tabPage1->SuspendLayout();
 			this->SuspendLayout();
-			// 
-			// tabControl1
-			// 
-			this->tabControl1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->tabControl1->Controls->Add(this->tabPage1);
-			this->tabControl1->Controls->Add(this->tabPage2);
-			this->tabControl1->Location = System::Drawing::Point(-2, 0);
-			this->tabControl1->Name = L"tabControl1";
-			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(941, 512);
-			this->tabControl1->TabIndex = 0;
-			// 
-			// tabPage1
-			// 
-			this->tabPage1->Controls->Add(this->tag_button);
-			this->tabPage1->Controls->Add(this->tag_text);
-			this->tabPage1->Controls->Add(this->checkBox_pl);
-			this->tabPage1->Controls->Add(this->checkBox_vk);
-			this->tabPage1->Controls->Add(this->picture_button);
-			this->tabPage1->Controls->Add(this->file_button);
-			this->tabPage1->Controls->Add(this->file_text);
-			this->tabPage1->Controls->Add(this->label2);
-			this->tabPage1->Controls->Add(this->label1);
-			this->tabPage1->Controls->Add(this->checkBox_ru);
-			this->tabPage1->Controls->Add(this->allOffButton);
-			this->tabPage1->Controls->Add(this->allOnButton);
-			this->tabPage1->Controls->Add(this->description_text);
-			this->tabPage1->Controls->Add(this->name_text);
-			this->tabPage1->Controls->Add(this->checkBox_ya);
-			this->tabPage1->Controls->Add(this->checkBox_yt);
-			this->tabPage1->Controls->Add(this->ML_button);
-			this->tabPage1->Location = System::Drawing::Point(4, 22);
-			this->tabPage1->Name = L"tabPage1";
-			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(933, 486);
-			this->tabPage1->TabIndex = 0;
-			this->tabPage1->Text = L"Основные";
-			this->tabPage1->UseVisualStyleBackColor = true;
-			this->tabPage1->Click += gcnew System::EventHandler(this, &MultiLoader::tabPage1_Click);
 			// 
 			// tag_button
 			// 
@@ -381,16 +332,6 @@ namespace MultiLoader {
 			this->ML_button->UseVisualStyleBackColor = true;
 			this->ML_button->Click += gcnew System::EventHandler(this, &MultiLoader::ML_button_Click);
 			// 
-			// tabPage2
-			// 
-			this->tabPage2->Location = System::Drawing::Point(4, 22);
-			this->tabPage2->Name = L"tabPage2";
-			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(933, 486);
-			this->tabPage2->TabIndex = 1;
-			this->tabPage2->Text = L"Дополнительно";
-			this->tabPage2->UseVisualStyleBackColor = true;
-			// 
 			// openFileDialog2
 			// 
 			this->openFileDialog2->FileName = L"openFileDialog2";
@@ -399,15 +340,28 @@ namespace MultiLoader {
 			// 
 			// MultiLoader
 			// 
+			this->Controls->Add(this->tag_button);
+			this->Controls->Add(this->tag_text);
+			this->Controls->Add(this->checkBox_pl);
+			this->Controls->Add(this->checkBox_vk);
+			this->Controls->Add(this->picture_button);
+			this->Controls->Add(this->file_button);
+			this->Controls->Add(this->file_text);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->checkBox_ru);
+			this->Controls->Add(this->allOffButton);
+			this->Controls->Add(this->allOnButton);
+			this->Controls->Add(this->description_text);
+			this->Controls->Add(this->name_text);
+			this->Controls->Add(this->checkBox_ya);
+			this->Controls->Add(this->checkBox_yt);
+			this->Controls->Add(this->ML_button);
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(939, 510);
-			this->Controls->Add(this->tabControl1);
 			this->Name = L"MultiLoader";
 			this->Text = L"MultiLoader";
-			this->tabControl1->ResumeLayout(false);
-			this->tabPage1->ResumeLayout(false);
-			this->tabPage1->PerformLayout();
 			this->ResumeLayout(false);
 
 		}

@@ -1,5 +1,5 @@
 ﻿  MultiLoader.cpp
-C:\Users\kostyan\Documents\Xtorage\MultiLoader\MultiLoader\MultiLoader\MultiLoader.h(442,15): warning C4244: инициализация: преобразование "ULONGLONG" в "DWORD", возможна потеря данных
+C:\Users\kostyan\Documents\Xtorage\MultiLoader\MultiLoader\MultiLoader\MultiLoader.h(433,15): warning C4244: инициализация: преобразование "ULONGLONG" в "DWORD", возможна потеря данных
   (компиляция исходного файла "MultiLoader.cpp")
   
   MultiLoader.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка

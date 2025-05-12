@@ -78,9 +78,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files\vcpkg-master\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>Shell32.lib;User32.lib;ole32.lib;oleaut32.lib</AdditionalDependencies>
+      <AdditionalDependencies>Shell32.lib;User32.lib;ole32.lib;oleaut32.lib;libcurl.lib </AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files\vcpkg-master\installed\x64-windows\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -124,6 +126,7 @@
     <ClInclude Include="MultiLoader.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="UIAuto.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MultiLoader.resx">
