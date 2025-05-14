@@ -1,13 +1,7 @@
 ﻿#pragma once
-#include <windows.h>
-#include <uiautomation.h>
-#include <shlobj.h>
-#include <exdisp.h> 
-#include <atlbase.h> 
-#include <atlcom.h> 
-#include <vcclr.h>
-#include <string>
-#include <iostream>
+#include "UIAuto.h"
+#include "curlAuto.h"
+#include "Resource.h"
 
 namespace MultiLoader {
 	using namespace System;
@@ -24,27 +18,27 @@ namespace MultiLoader {
 		String^ file_link;
 		String^ picture_link;
 		String^ name;
+		String^ description;
 
-
-	private: System::Windows::Forms::TextBox^ tag_text;
-	private: System::Windows::Forms::Button^ tag_button;
-		   String^ description;
+	
+		   
 
 	public:
 		MultiLoader(void)
 		{
+			file_link = "C:\\";
+			picture_link = "default";
+			name = "default";
+			description = "default";
 			InitializeComponent();
-			file_link= "C:\\";
-			picture_link= "default";
-			name= "default";
-			description= "default";
 		}
 		~MultiLoader()
 		{
 			if (components) delete components;
 		}
 	protected:
-
+	private: System::Windows::Forms::TextBox^ tag_text;
+	private: System::Windows::Forms::Button^ tag_button;
 	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
 	private: System::Windows::Forms::Button^ ML_button;
 	private: System::Windows::Forms::CheckBox^ checkBox_yt;
@@ -70,6 +64,7 @@ namespace MultiLoader {
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MultiLoader::typeid));
 			this->tag_button = (gcnew System::Windows::Forms::Button());
 			this->tag_text = (gcnew System::Windows::Forms::TextBox());
 			this->checkBox_pl = (gcnew System::Windows::Forms::CheckBox());
@@ -94,16 +89,15 @@ namespace MultiLoader {
 			// 
 			// tag_button
 			// 
-			this->tag_button->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->tag_button->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->tag_button->Location = System::Drawing::Point(325, 287);
+			this->tag_button->Location = System::Drawing::Point(472, 335);
 			this->tag_button->Name = L"tag_button";
-			this->tag_button->Size = System::Drawing::Size(93, 36);
+			this->tag_button->Size = System::Drawing::Size(93, 26);
 			this->tag_button->TabIndex = 28;
-			this->tag_button->Text = L"Auto-tag";
+			this->tag_button->Text = L"Авто-тэг";
 			this->tag_button->UseVisualStyleBackColor = true;
-			this->tag_button->Click += gcnew System::EventHandler(this, &MultiLoader::button1_Click);
+			this->tag_button->Click += gcnew System::EventHandler(this, &MultiLoader::tag_button_Click);
 			// 
 			// tag_text
 			// 
@@ -111,11 +105,11 @@ namespace MultiLoader {
 				static_cast<System::Byte>(0)));
 			this->tag_text->ForeColor = System::Drawing::SystemColors::GrayText;
 			this->tag_text->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->tag_text->Location = System::Drawing::Point(423, 292);
+			this->tag_text->Location = System::Drawing::Point(570, 335);
 			this->tag_text->Margin = System::Windows::Forms::Padding(2);
 			this->tag_text->MaxLength = 100;
 			this->tag_text->Name = L"tag_text";
-			this->tag_text->Size = System::Drawing::Size(378, 26);
+			this->tag_text->Size = System::Drawing::Size(492, 26);
 			this->tag_text->TabIndex = 27;
 			this->tag_text->Text = L"Тэги";
 			this->tag_text->UseWaitCursor = true;
@@ -123,49 +117,52 @@ namespace MultiLoader {
 			// checkBox_pl
 			// 
 			this->checkBox_pl->AutoSize = true;
+			this->checkBox_pl->BackColor = System::Drawing::SystemColors::Window;
 			this->checkBox_pl->Checked = true;
 			this->checkBox_pl->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->checkBox_pl->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->checkBox_pl->Location = System::Drawing::Point(48, 245);
+			this->checkBox_pl->Location = System::Drawing::Point(100, 292);
 			this->checkBox_pl->Name = L"checkBox_pl";
 			this->checkBox_pl->Size = System::Drawing::Size(110, 25);
 			this->checkBox_pl->TabIndex = 26;
 			this->checkBox_pl->Tag = L"checkBox";
 			this->checkBox_pl->Text = L"Платформа";
-			this->checkBox_pl->UseVisualStyleBackColor = true;
+			this->checkBox_pl->UseVisualStyleBackColor = false;
 			// 
 			// checkBox_vk
 			// 
 			this->checkBox_vk->AutoSize = true;
+			this->checkBox_vk->BackColor = System::Drawing::SystemColors::Window;
 			this->checkBox_vk->Checked = true;
 			this->checkBox_vk->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->checkBox_vk->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->checkBox_vk->Location = System::Drawing::Point(48, 215);
+			this->checkBox_vk->Location = System::Drawing::Point(100, 262);
 			this->checkBox_vk->Name = L"checkBox_vk";
 			this->checkBox_vk->Size = System::Drawing::Size(101, 25);
 			this->checkBox_vk->TabIndex = 25;
 			this->checkBox_vk->Tag = L"checkBox";
 			this->checkBox_vk->Text = L"VK Видео";
-			this->checkBox_vk->UseVisualStyleBackColor = true;
+			this->checkBox_vk->UseVisualStyleBackColor = false;
 			// 
 			// picture_button
 			// 
-			this->picture_button->Location = System::Drawing::Point(325, 209);
+			this->picture_button->Location = System::Drawing::Point(472, 257);
 			this->picture_button->Margin = System::Windows::Forms::Padding(2);
 			this->picture_button->Name = L"picture_button";
 			this->picture_button->Size = System::Drawing::Size(167, 73);
 			this->picture_button->TabIndex = 24;
+			this->picture_button->Text = L"Вставьте изображение";
 			this->picture_button->UseVisualStyleBackColor = true;
 			this->picture_button->Click += gcnew System::EventHandler(this, &MultiLoader::picture_button_Click);
 			// 
 			// file_button
 			// 
-			this->file_button->Location = System::Drawing::Point(778, 179);
+			this->file_button->Location = System::Drawing::Point(1036, 227);
 			this->file_button->Margin = System::Windows::Forms::Padding(2);
 			this->file_button->Name = L"file_button";
-			this->file_button->Size = System::Drawing::Size(23, 26);
+			this->file_button->Size = System::Drawing::Size(26, 26);
 			this->file_button->TabIndex = 23;
 			this->file_button->Text = L"...";
 			this->file_button->UseVisualStyleBackColor = true;
@@ -175,12 +172,12 @@ namespace MultiLoader {
 			// 
 			this->file_text->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->file_text->Location = System::Drawing::Point(325, 179);
+			this->file_text->Location = System::Drawing::Point(472, 227);
 			this->file_text->Margin = System::Windows::Forms::Padding(2);
 			this->file_text->Name = L"file_text";
-			this->file_text->Size = System::Drawing::Size(449, 26);
+			this->file_text->Size = System::Drawing::Size(560, 26);
 			this->file_text->TabIndex = 22;
-			this->file_text->Text = this->openFileDialog1->InitialDirectory;
+			this->file_text->Text = "C:\\";
 			this->file_text->TextChanged += gcnew System::EventHandler(this, &MultiLoader::file_text_TextChanged);
 			// 
 			// openFileDialog1
@@ -192,9 +189,10 @@ namespace MultiLoader {
 			// label2
 			// 
 			this->label2->AutoSize = true;
+			this->label2->BackColor = System::Drawing::SystemColors::Window;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Cascadia Mono", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->Location = System::Drawing::Point(323, 50);
+			this->label2->Location = System::Drawing::Point(470, 97);
 			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(122, 25);
@@ -204,9 +202,10 @@ namespace MultiLoader {
 			// label1
 			// 
 			this->label1->AutoSize = true;
+			this->label1->BackColor = System::Drawing::SystemColors::Window;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Cascadia Mono", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(44, 50);
+			this->label1->Location = System::Drawing::Point(96, 97);
 			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(111, 25);
@@ -216,23 +215,24 @@ namespace MultiLoader {
 			// checkBox_ru
 			// 
 			this->checkBox_ru->AutoSize = true;
+			this->checkBox_ru->BackColor = System::Drawing::SystemColors::Window;
 			this->checkBox_ru->Checked = true;
 			this->checkBox_ru->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->checkBox_ru->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->checkBox_ru->Location = System::Drawing::Point(48, 185);
+			this->checkBox_ru->Location = System::Drawing::Point(100, 232);
 			this->checkBox_ru->Name = L"checkBox_ru";
 			this->checkBox_ru->Size = System::Drawing::Size(83, 25);
 			this->checkBox_ru->TabIndex = 14;
 			this->checkBox_ru->Tag = L"checkBox";
 			this->checkBox_ru->Text = L"RuTube";
-			this->checkBox_ru->UseVisualStyleBackColor = true;
+			this->checkBox_ru->UseVisualStyleBackColor = false;
 			// 
 			// allOffButton
 			// 
 			this->allOffButton->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->allOffButton->Location = System::Drawing::Point(157, 81);
+			this->allOffButton->Location = System::Drawing::Point(209, 128);
 			this->allOffButton->Name = L"allOffButton";
 			this->allOffButton->Size = System::Drawing::Size(107, 34);
 			this->allOffButton->TabIndex = 13;
@@ -244,7 +244,7 @@ namespace MultiLoader {
 			// 
 			this->allOnButton->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->allOnButton->Location = System::Drawing::Point(45, 81);
+			this->allOnButton->Location = System::Drawing::Point(97, 128);
 			this->allOnButton->Name = L"allOnButton";
 			this->allOnButton->Size = System::Drawing::Size(107, 34);
 			this->allOnButton->TabIndex = 12;
@@ -257,13 +257,13 @@ namespace MultiLoader {
 			this->description_text->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->description_text->ForeColor = System::Drawing::SystemColors::GrayText;
-			this->description_text->Location = System::Drawing::Point(325, 114);
+			this->description_text->Location = System::Drawing::Point(472, 161);
 			this->description_text->Margin = System::Windows::Forms::Padding(2);
 			this->description_text->MaxLength = 5000;
 			this->description_text->Multiline = true;
 			this->description_text->Name = L"description_text";
 			this->description_text->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			this->description_text->Size = System::Drawing::Size(476, 62);
+			this->description_text->Size = System::Drawing::Size(590, 62);
 			this->description_text->TabIndex = 19;
 			this->description_text->Text = L"Описание";
 			this->description_text->UseWaitCursor = true;
@@ -277,11 +277,11 @@ namespace MultiLoader {
 				static_cast<System::Byte>(0)));
 			this->name_text->ForeColor = System::Drawing::SystemColors::GrayText;
 			this->name_text->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->name_text->Location = System::Drawing::Point(325, 84);
+			this->name_text->Location = System::Drawing::Point(472, 131);
 			this->name_text->Margin = System::Windows::Forms::Padding(2);
 			this->name_text->MaxLength = 100;
 			this->name_text->Name = L"name_text";
-			this->name_text->Size = System::Drawing::Size(476, 26);
+			this->name_text->Size = System::Drawing::Size(590, 26);
 			this->name_text->TabIndex = 17;
 			this->name_text->Text = L"Название";
 			this->name_text->UseWaitCursor = true;
@@ -292,39 +292,41 @@ namespace MultiLoader {
 			// checkBox_ya
 			// 
 			this->checkBox_ya->AutoSize = true;
+			this->checkBox_ya->BackColor = System::Drawing::SystemColors::Window;
 			this->checkBox_ya->Checked = true;
 			this->checkBox_ya->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->checkBox_ya->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->checkBox_ya->Location = System::Drawing::Point(48, 155);
+			this->checkBox_ya->Location = System::Drawing::Point(100, 202);
 			this->checkBox_ya->Name = L"checkBox_ya";
 			this->checkBox_ya->Size = System::Drawing::Size(128, 25);
 			this->checkBox_ya->TabIndex = 7;
 			this->checkBox_ya->Tag = L"checkBox";
 			this->checkBox_ya->Text = L"Яндекс Дзен";
-			this->checkBox_ya->UseVisualStyleBackColor = true;
+			this->checkBox_ya->UseVisualStyleBackColor = false;
 			// 
 			// checkBox_yt
 			// 
 			this->checkBox_yt->AutoSize = true;
+			this->checkBox_yt->BackColor = System::Drawing::SystemColors::Window;
 			this->checkBox_yt->Checked = true;
 			this->checkBox_yt->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->checkBox_yt->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->checkBox_yt->Location = System::Drawing::Point(48, 125);
+			this->checkBox_yt->Location = System::Drawing::Point(100, 172);
 			this->checkBox_yt->Name = L"checkBox_yt";
 			this->checkBox_yt->Size = System::Drawing::Size(92, 25);
 			this->checkBox_yt->TabIndex = 4;
 			this->checkBox_yt->Tag = L"checkBox";
 			this->checkBox_yt->Text = L"YouTube";
-			this->checkBox_yt->UseVisualStyleBackColor = true;
+			this->checkBox_yt->UseVisualStyleBackColor = false;
 			// 
 			// ML_button
 			// 
 			this->ML_button->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->ML_button->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->ML_button->Location = System::Drawing::Point(796, 432);
+			this->ML_button->Location = System::Drawing::Point(1349, 672);
 			this->ML_button->Name = L"ML_button";
 			this->ML_button->Size = System::Drawing::Size(110, 29);
 			this->ML_button->TabIndex = 1;
@@ -340,6 +342,10 @@ namespace MultiLoader {
 			// 
 			// MultiLoader
 			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->ClientSize = System::Drawing::Size(1519, 747);
 			this->Controls->Add(this->tag_button);
 			this->Controls->Add(this->tag_text);
 			this->Controls->Add(this->checkBox_pl);
@@ -357,164 +363,31 @@ namespace MultiLoader {
 			this->Controls->Add(this->checkBox_ya);
 			this->Controls->Add(this->checkBox_yt);
 			this->Controls->Add(this->ML_button);
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(939, 510);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"MultiLoader";
 			this->Text = L"MultiLoader";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
-	void ClickAtPosition(int x, int y) {
-		SetCursorPos(x, y);
-		mouse_event(MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
-		Sleep(50);  
-		mouse_event(MOUSEEVENTF_LEFTUP, x, y, 0, 0);
+	private: void SetEnglishLayout()
+	{
+		for each (InputLanguage^ lang in InputLanguage::InstalledInputLanguages)
+		{
+			if (lang->Culture->Name->StartsWith("en"))
+			{
+				InputLanguage::CurrentInputLanguage = lang;
+				break;
+			}
+		}
 	}
+	
 	private: void CopyToClipboard(String^ text) {
 		Clipboard::SetText(text);
 	}
 
-	private: void pasteText() {
-		keybd_event(VK_CONTROL, 0, 0, 0);       // Нажать Ctrl
-		keybd_event('V', 0, 0, 0);              // Нажать V
-		keybd_event('V', 0, KEYEVENTF_KEYUP, 0); // Отпустить V
-		keybd_event(VK_CONTROL, 0, KEYEVENTF_KEYUP, 0);
-	}
-
-	private: void pressEnter() {
-		keybd_event(VK_RETURN, 0, 0, 0);
-		keybd_event(VK_RETURN, 0, KEYEVENTF_KEYUP, 0);
-	}
-
-	private: void pressTab() {
-		keybd_event(VK_TAB, 0, 0, 0);       // Нажатие Tab
-		keybd_event(VK_TAB, 0, KEYEVENTF_KEYUP, 0);  // Отпускание Tab
-	}
-
-	private: void clearText() {
-		keybd_event(VK_CONTROL, 0, 0, 0);      // Ctrl down
-		keybd_event('A', 0, 0, 0);             // A down
-		keybd_event(VK_DELETE, 0, 0, 0);       // Delete down
-
-		// Отпускаем в обратном порядке
-		keybd_event(VK_DELETE, 0, KEYEVENTF_KEYUP, 0);
-		keybd_event('A', 0, KEYEVENTF_KEYUP, 0);
-		keybd_event(VK_CONTROL, 0, KEYEVENTF_KEYUP, 0);
-	}
-	private: void ClickElementByName(IUIAutomation* pAutomation, IUIAutomationElement* pParent, const wchar_t* name) {
-		IUIAutomationCondition* pCondition = nullptr;
-		pAutomation->CreatePropertyCondition(UIA_NamePropertyId, CComVariant(name), &pCondition);
-
-		IUIAutomationElement* pElement = nullptr;
-		pParent->FindFirst(TreeScope_Descendants, pCondition, &pElement);
-
-		if (pElement) {
-			IUIAutomationInvokePattern* pInvoke = nullptr;
-			pElement->GetCurrentPattern(UIA_InvokePatternId, (IUnknown**)&pInvoke);
-			if (pInvoke) {
-				pInvoke->Invoke();
-				pInvoke->Release();
-			}
-			pElement->Release();
-		}
-		if (pCondition) pCondition->Release();
-	}
-
-	private: HWND WaitForBrowserWindow() {
-		const wchar_t* browserClasses[] = {
-			L"Chrome_WidgetWin_1",  // Google Chrome
-			L"MozillaWindowClass",   // Firefox
-			L"Edge_WidgetWin_1"     // Microsoft Edge
-		};
-
-		DWORD timeout = 30000;
-		DWORD start = GetTickCount64();
-		while (GetTickCount64() - start < timeout) {
-			for (const wchar_t* cls : browserClasses) {
-				HWND hWnd = FindWindow(cls, NULL);
-				if (hWnd) return hWnd;
-			}
-			Sleep(500);
-		}
-		return NULL;
-	}
-
-
-
-	private: bool IsElementVisible(IUIAutomationElement* pElement) {
-		if (!pElement) return false;
-
-		VARIANT varIsOffscreen;
-		HRESULT hr = pElement->GetCurrentPropertyValue(UIA_IsOffscreenPropertyId, &varIsOffscreen);
-
-		if (SUCCEEDED(hr) && varIsOffscreen.vt == VT_BOOL) {
-			bool isVisible = !varIsOffscreen.boolVal;
-			VariantClear(&varIsOffscreen);
-			return isVisible;
-		}
-
-		return false;
-	}
-
-	private: bool WaitForElement(IUIAutomation* pAutomation, IUIAutomationElement* pParent,
-		LPCWSTR elementName, int timeoutSeconds)
-	{
-		DWORD startTime = GetTickCount();
-
-		while ((GetTickCount() - startTime) < (DWORD)(timeoutSeconds * 1000)) {
-			VARIANT varName;
-			varName.vt = VT_BSTR;
-			varName.bstrVal = SysAllocString(elementName);
-
-			IUIAutomationCondition* pCondition = nullptr;
-			pAutomation->CreatePropertyCondition(UIA_NamePropertyId, varName, &pCondition);
-			VariantClear(&varName);
-
-			IUIAutomationElement* pElement = nullptr;
-			pParent->FindFirst(TreeScope_Descendants, pCondition, &pElement);
-			pCondition->Release();
-
-			if (pElement) {
-				bool isVisible = IsElementVisible(pElement);
-				pElement->Release();
-
-				if (isVisible) {
-					return true;
-				}
-			}
-
-			Sleep(500);
-		}
-
-		return false;
-	}
-
-	// Функция для периодической проверки
-	bool WaitForFileDialog(int timeoutSec)
-	{
-		DWORD startTime = GetTickCount();
-
-		while (true)
-		{
-			HWND hWnd = GetForegroundWindow();
-			wchar_t className[256];
-			GetClassName(hWnd, className, 256);
-
-			if (wcscmp(className, L"#32770") == 0)
-			{
-				return true;  
-			}
-
-			if ((GetTickCount() - startTime) >= (DWORD)timeoutSec)
-			{
-				return false;  
-			}
-
-			Sleep(500);
-		}
-	}
 	private: void ytLoad(IUIAutomation *pAutomation) {
 		ShellExecute(NULL, TEXT("open"), TEXT("https://studio.youtube.com/"), NULL, NULL, SW_MAXIMIZE);
 		IUIAutomationElement* pRoot = nullptr;
@@ -535,7 +408,7 @@ namespace MultiLoader {
 		EmptyClipboard();
 		CopyToClipboard(this->file_link);
 		WaitForFileDialog(360);
-		Sleep(500);
+		Sleep(1000);
 		pasteText();
 		Sleep(200);
 		pressEnter();
@@ -870,7 +743,7 @@ namespace MultiLoader {
 	}
 
 	private: System::Void ML_button_Click(System::Object^ sender, System::EventArgs^ e) {
-		
+		SetEnglishLayout();
 		CoInitialize(NULL);
 		IUIAutomation* pAutomation = nullptr;
 		HRESULT hr = CoCreateInstance(
@@ -886,7 +759,6 @@ namespace MultiLoader {
 		if (this->checkBox_ru->Checked == true) ruLoad(pAutomation);
 		if (this->checkBox_vk->Checked == true) vkLoad(pAutomation);
 		if (this->checkBox_pl->Checked == true) plLoad(pAutomation);
-
 
 		pAutomation->Release();
 		CoUninitialize();
@@ -905,6 +777,33 @@ namespace MultiLoader {
 		this->checkBox_ru->Checked = false;
 		this->checkBox_vk->Checked = false;
 		this->checkBox_pl->Checked = false;
+	}
+
+	private: System::Void tag_button_Click(System::Object^ sender, System::EventArgs^ e) {
+		try {
+			String^ tags = getTags(this->name);
+			this->tag_text->Text = tags;
+		}
+		catch (System::Exception^ ex) {
+			// Обработка управляемых исключений
+			System::Windows::Forms::MessageBox::Show(
+				ex->Message,
+				"Ошибка",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Error);
+
+			System::Diagnostics::Debug::WriteLine(ex->Message);
+		}
+		catch (const std::exception& ex) {
+			// Обработка неуправляемых исключений
+			System::Windows::Forms::MessageBox::Show(
+				gcnew String(ex.what()),
+				"Ошибка",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Error);
+
+			System::Diagnostics::Debug::WriteLine(gcnew String(ex.what()));
+		}
 	}
 
 	private: System::Void On_name_text_GotFocus(Object^ sender, EventArgs^ e)
@@ -951,7 +850,7 @@ namespace MultiLoader {
 				message += file;
 			}
 			this->file_link = message;
-			this->file_text->Text = file_link;
+			this->file_text->Text = this->file_link;
 		}
 	}
 	private: System::Void picture_button_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -974,8 +873,5 @@ namespace MultiLoader {
 	private: System::Void description_text_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->description = this->description_text->Text;
 	}
-
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-}
 };
 }

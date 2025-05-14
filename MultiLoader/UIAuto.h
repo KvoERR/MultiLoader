@@ -7,15 +7,8 @@
 #include <atlcom.h> 
 #include <vcclr.h>
 
-void ClickAtPosition(int x, int y)
-{
-    if (!SetCursorPos(x, y))
-    {
-        DWORD error = GetLastError();
-        // Можно добавить логирование ошибки
-        return;
-    }
-
+void ClickAtPosition(int x, int y) {
+    SetCursorPos(x, y);
     mouse_event(MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
     Sleep(50);
     mouse_event(MOUSEEVENTF_LEFTUP, x, y, 0, 0);
@@ -77,7 +70,7 @@ void clearText()
     // Ctrl down
     inputs[0].type = INPUT_KEYBOARD;
     inputs[0].ki.wVk = VK_CONTROL;
-
+    
     // A down
     inputs[1].type = INPUT_KEYBOARD;
     inputs[1].ki.wVk = 'A';
@@ -234,4 +227,17 @@ bool WaitForFileDialog(int timeoutSec)
     }
 
     return false;
+}
+
+void startAuto()
+{
+    CoInitialize(NULL);
+    IUIAutomation* pAutomation = nullptr;
+    HRESULT hr = CoCreateInstance(
+        CLSID_CUIAutomation,
+        NULL,
+        CLSCTX_INPROC_SERVER,
+        IID_IUIAutomation,
+        (void**)&pAutomation
+    );
 }

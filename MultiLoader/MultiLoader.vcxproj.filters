@@ -26,5 +26,24 @@
     <ClInclude Include="UIAuto.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="curlAuto.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Файлы ресурсов</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\images\logo.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="images\fon.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>

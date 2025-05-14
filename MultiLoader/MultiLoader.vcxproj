@@ -81,7 +81,7 @@
       <AdditionalIncludeDirectories>C:\Program Files\vcpkg-master\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>Shell32.lib;User32.lib;ole32.lib;oleaut32.lib;libcurl.lib </AdditionalDependencies>
+      <AdditionalDependencies>Shell32.lib;User32.lib;ole32.lib;oleaut32.lib;libcurl.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Program Files\vcpkg-master\installed\x64-windows\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -123,15 +123,24 @@
     <ClCompile Include="MultiLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="curlAuto.h" />
     <ClInclude Include="MultiLoader.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="UIAuto.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MultiLoader.resx">
       <DependentUpon>MultiLoader.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\images\logo.ico" />
+    <Image Include="images\fon.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
