@@ -14,6 +14,24 @@ void ClickAtPosition(int x, int y) {
     mouse_event(MOUSEEVENTF_LEFTUP, x, y, 0, 0);
 }
 
+void ClickRelative(double x_percent, double y_percent) {
+    // Получаем размер экрана
+    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
+    // Рассчитываем абсолютные координаты
+    int x = static_cast<int>(screenWidth * x_percent);
+    int y = static_cast<int>(screenHeight * y_percent);
+
+    // Перемещаем курсор
+    SetCursorPos(x, y);
+
+    // Имитация клика мышью
+    mouse_event(MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
+    Sleep(50); // небольшая задержка
+    mouse_event(MOUSEEVENTF_LEFTUP, x, y, 0, 0);
+}
+
 void pasteText()
 {
     INPUT inputs[4] = { 0 };

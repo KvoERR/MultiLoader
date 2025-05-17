@@ -121,10 +121,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MultiLoader.cpp" />
+    <ClCompile Include="ProgressWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="curlAuto.h" />
     <ClInclude Include="MultiLoader.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ProgressWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="resource.h" />
@@ -133,6 +137,9 @@
   <ItemGroup>
     <EmbeddedResource Include="MultiLoader.resx">
       <DependentUpon>MultiLoader.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProgressWindow.resx">
+      <DependentUpon>ProgressWindow.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

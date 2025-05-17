@@ -20,9 +20,6 @@ namespace MultiLoader {
 		String^ name;
 		String^ description;
 
-	
-		   
-
 	public:
 		MultiLoader(void)
 		{
@@ -52,6 +49,7 @@ namespace MultiLoader {
 	private: System::Windows::Forms::Button^ allOffButton;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog2;
 	private: System::Windows::Forms::TextBox^ file_text;
@@ -85,34 +83,41 @@ namespace MultiLoader {
 			this->ML_button = (gcnew System::Windows::Forms::Button());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->openFileDialog2 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// tag_button
 			// 
+			this->tag_button->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->tag_button->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->tag_button->Location = System::Drawing::Point(472, 335);
+			this->tag_button->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->tag_button->Location = System::Drawing::Point(708, 515);
+			this->tag_button->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->tag_button->Name = L"tag_button";
-			this->tag_button->Size = System::Drawing::Size(93, 26);
+			this->tag_button->Size = System::Drawing::Size(140, 40);
 			this->tag_button->TabIndex = 28;
 			this->tag_button->Text = L"Авто-тэг";
-			this->tag_button->UseVisualStyleBackColor = true;
+			this->tag_button->UseVisualStyleBackColor = false;
 			this->tag_button->Click += gcnew System::EventHandler(this, &MultiLoader::tag_button_Click);
 			// 
 			// tag_text
 			// 
+			this->tag_text->BackColor = System::Drawing::Color::NavajoWhite;
 			this->tag_text->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->tag_text->ForeColor = System::Drawing::SystemColors::GrayText;
 			this->tag_text->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->tag_text->Location = System::Drawing::Point(570, 335);
-			this->tag_text->Margin = System::Windows::Forms::Padding(2);
+			this->tag_text->Location = System::Drawing::Point(855, 515);
 			this->tag_text->MaxLength = 100;
 			this->tag_text->Name = L"tag_text";
-			this->tag_text->Size = System::Drawing::Size(492, 26);
+			this->tag_text->Size = System::Drawing::Size(736, 35);
 			this->tag_text->TabIndex = 27;
 			this->tag_text->Text = L"Тэги";
 			this->tag_text->UseWaitCursor = true;
+			this->tag_text->GotFocus += gcnew System::EventHandler(this, &MultiLoader::On_tag_text_GotFocus);
+			this->tag_text->LostFocus += gcnew System::EventHandler(this, &MultiLoader::On_tag_text_LostFocus);
 			// 
 			// checkBox_pl
 			// 
@@ -122,9 +127,10 @@ namespace MultiLoader {
 			this->checkBox_pl->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->checkBox_pl->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->checkBox_pl->Location = System::Drawing::Point(100, 292);
+			this->checkBox_pl->Location = System::Drawing::Point(150, 449);
+			this->checkBox_pl->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->checkBox_pl->Name = L"checkBox_pl";
-			this->checkBox_pl->Size = System::Drawing::Size(110, 25);
+			this->checkBox_pl->Size = System::Drawing::Size(166, 36);
 			this->checkBox_pl->TabIndex = 26;
 			this->checkBox_pl->Tag = L"checkBox";
 			this->checkBox_pl->Text = L"Платформа";
@@ -138,9 +144,10 @@ namespace MultiLoader {
 			this->checkBox_vk->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->checkBox_vk->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->checkBox_vk->Location = System::Drawing::Point(100, 262);
+			this->checkBox_vk->Location = System::Drawing::Point(150, 403);
+			this->checkBox_vk->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->checkBox_vk->Name = L"checkBox_vk";
-			this->checkBox_vk->Size = System::Drawing::Size(101, 25);
+			this->checkBox_vk->Size = System::Drawing::Size(152, 36);
 			this->checkBox_vk->TabIndex = 25;
 			this->checkBox_vk->Tag = L"checkBox";
 			this->checkBox_vk->Text = L"VK Видео";
@@ -148,21 +155,22 @@ namespace MultiLoader {
 			// 
 			// picture_button
 			// 
-			this->picture_button->Location = System::Drawing::Point(472, 257);
-			this->picture_button->Margin = System::Windows::Forms::Padding(2);
+			this->picture_button->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			this->picture_button->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->picture_button->Location = System::Drawing::Point(708, 395);
 			this->picture_button->Name = L"picture_button";
-			this->picture_button->Size = System::Drawing::Size(167, 73);
+			this->picture_button->Size = System::Drawing::Size(250, 112);
 			this->picture_button->TabIndex = 24;
 			this->picture_button->Text = L"Вставьте изображение";
-			this->picture_button->UseVisualStyleBackColor = true;
+			this->picture_button->UseVisualStyleBackColor = false;
 			this->picture_button->Click += gcnew System::EventHandler(this, &MultiLoader::picture_button_Click);
 			// 
 			// file_button
 			// 
-			this->file_button->Location = System::Drawing::Point(1036, 227);
-			this->file_button->Margin = System::Windows::Forms::Padding(2);
+			this->file_button->Location = System::Drawing::Point(1554, 349);
 			this->file_button->Name = L"file_button";
-			this->file_button->Size = System::Drawing::Size(26, 26);
+			this->file_button->Size = System::Drawing::Size(39, 40);
 			this->file_button->TabIndex = 23;
 			this->file_button->Text = L"...";
 			this->file_button->UseVisualStyleBackColor = true;
@@ -170,14 +178,14 @@ namespace MultiLoader {
 			// 
 			// file_text
 			// 
+			this->file_text->BackColor = System::Drawing::Color::NavajoWhite;
 			this->file_text->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->file_text->Location = System::Drawing::Point(472, 227);
-			this->file_text->Margin = System::Windows::Forms::Padding(2);
+			this->file_text->Location = System::Drawing::Point(708, 349);
 			this->file_text->Name = L"file_text";
-			this->file_text->Size = System::Drawing::Size(560, 26);
+			this->file_text->Size = System::Drawing::Size(838, 35);
 			this->file_text->TabIndex = 22;
-			this->file_text->Text = "C:\\";
+			this->file_text->Text = L"C:\\";
 			this->file_text->TextChanged += gcnew System::EventHandler(this, &MultiLoader::file_text_TextChanged);
 			// 
 			// openFileDialog1
@@ -192,10 +200,9 @@ namespace MultiLoader {
 			this->label2->BackColor = System::Drawing::SystemColors::Window;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Cascadia Mono", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->Location = System::Drawing::Point(470, 97);
-			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label2->Location = System::Drawing::Point(705, 149);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(122, 25);
+			this->label2->Size = System::Drawing::Size(177, 37);
 			this->label2->TabIndex = 21;
 			this->label2->Text = L"Информация";
 			// 
@@ -205,10 +212,9 @@ namespace MultiLoader {
 			this->label1->BackColor = System::Drawing::SystemColors::Window;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Cascadia Mono", 14, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(96, 97);
-			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label1->Location = System::Drawing::Point(144, 149);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(111, 25);
+			this->label1->Size = System::Drawing::Size(161, 37);
 			this->label1->TabIndex = 20;
 			this->label1->Text = L"Платформы";
 			// 
@@ -220,9 +226,10 @@ namespace MultiLoader {
 			this->checkBox_ru->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->checkBox_ru->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->checkBox_ru->Location = System::Drawing::Point(100, 232);
+			this->checkBox_ru->Location = System::Drawing::Point(150, 357);
+			this->checkBox_ru->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->checkBox_ru->Name = L"checkBox_ru";
-			this->checkBox_ru->Size = System::Drawing::Size(83, 25);
+			this->checkBox_ru->Size = System::Drawing::Size(124, 36);
 			this->checkBox_ru->TabIndex = 14;
 			this->checkBox_ru->Tag = L"checkBox";
 			this->checkBox_ru->Text = L"RuTube";
@@ -230,40 +237,48 @@ namespace MultiLoader {
 			// 
 			// allOffButton
 			// 
+			this->allOffButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->allOffButton->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->allOffButton->Location = System::Drawing::Point(209, 128);
+			this->allOffButton->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->allOffButton->Location = System::Drawing::Point(314, 197);
+			this->allOffButton->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->allOffButton->Name = L"allOffButton";
-			this->allOffButton->Size = System::Drawing::Size(107, 34);
+			this->allOffButton->Size = System::Drawing::Size(160, 52);
 			this->allOffButton->TabIndex = 13;
 			this->allOffButton->Text = L"Все выкл.";
-			this->allOffButton->UseVisualStyleBackColor = true;
+			this->allOffButton->UseVisualStyleBackColor = false;
 			this->allOffButton->Click += gcnew System::EventHandler(this, &MultiLoader::allOffButton_Click);
 			// 
 			// allOnButton
 			// 
+			this->allOnButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->allOnButton->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->allOnButton->Location = System::Drawing::Point(97, 128);
+			this->allOnButton->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->allOnButton->Location = System::Drawing::Point(146, 197);
+			this->allOnButton->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->allOnButton->Name = L"allOnButton";
-			this->allOnButton->Size = System::Drawing::Size(107, 34);
+			this->allOnButton->Size = System::Drawing::Size(160, 52);
 			this->allOnButton->TabIndex = 12;
 			this->allOnButton->Text = L"Все вкл.";
-			this->allOnButton->UseVisualStyleBackColor = true;
+			this->allOnButton->UseVisualStyleBackColor = false;
 			this->allOnButton->Click += gcnew System::EventHandler(this, &MultiLoader::allOnButton_Click);
 			// 
 			// description_text
 			// 
+			this->description_text->BackColor = System::Drawing::Color::NavajoWhite;
 			this->description_text->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->description_text->ForeColor = System::Drawing::SystemColors::GrayText;
-			this->description_text->Location = System::Drawing::Point(472, 161);
-			this->description_text->Margin = System::Windows::Forms::Padding(2);
+			this->description_text->Location = System::Drawing::Point(708, 248);
 			this->description_text->MaxLength = 5000;
 			this->description_text->Multiline = true;
 			this->description_text->Name = L"description_text";
 			this->description_text->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			this->description_text->Size = System::Drawing::Size(590, 62);
+			this->description_text->Size = System::Drawing::Size(883, 93);
 			this->description_text->TabIndex = 19;
 			this->description_text->Text = L"Описание";
 			this->description_text->UseWaitCursor = true;
@@ -273,15 +288,15 @@ namespace MultiLoader {
 			// 
 			// name_text
 			// 
+			this->name_text->BackColor = System::Drawing::Color::NavajoWhite;
 			this->name_text->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->name_text->ForeColor = System::Drawing::SystemColors::GrayText;
 			this->name_text->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->name_text->Location = System::Drawing::Point(472, 131);
-			this->name_text->Margin = System::Windows::Forms::Padding(2);
+			this->name_text->Location = System::Drawing::Point(708, 202);
 			this->name_text->MaxLength = 100;
 			this->name_text->Name = L"name_text";
-			this->name_text->Size = System::Drawing::Size(590, 26);
+			this->name_text->Size = System::Drawing::Size(883, 35);
 			this->name_text->TabIndex = 17;
 			this->name_text->Text = L"Название";
 			this->name_text->UseWaitCursor = true;
@@ -297,9 +312,10 @@ namespace MultiLoader {
 			this->checkBox_ya->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->checkBox_ya->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->checkBox_ya->Location = System::Drawing::Point(100, 202);
+			this->checkBox_ya->Location = System::Drawing::Point(150, 311);
+			this->checkBox_ya->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->checkBox_ya->Name = L"checkBox_ya";
-			this->checkBox_ya->Size = System::Drawing::Size(128, 25);
+			this->checkBox_ya->Size = System::Drawing::Size(194, 36);
 			this->checkBox_ya->TabIndex = 7;
 			this->checkBox_ya->Tag = L"checkBox";
 			this->checkBox_ya->Text = L"Яндекс Дзен";
@@ -313,9 +329,10 @@ namespace MultiLoader {
 			this->checkBox_yt->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->checkBox_yt->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->checkBox_yt->Location = System::Drawing::Point(100, 172);
+			this->checkBox_yt->Location = System::Drawing::Point(150, 265);
+			this->checkBox_yt->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->checkBox_yt->Name = L"checkBox_yt";
-			this->checkBox_yt->Size = System::Drawing::Size(92, 25);
+			this->checkBox_yt->Size = System::Drawing::Size(138, 36);
 			this->checkBox_yt->TabIndex = 4;
 			this->checkBox_yt->Tag = L"checkBox";
 			this->checkBox_yt->Text = L"YouTube";
@@ -324,14 +341,17 @@ namespace MultiLoader {
 			// ML_button
 			// 
 			this->ML_button->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->ML_button->BackColor = System::Drawing::Color::DarkOrange;
 			this->ML_button->Font = (gcnew System::Drawing::Font(L"Cascadia Mono Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->ML_button->Location = System::Drawing::Point(1349, 672);
+			this->ML_button->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->ML_button->Location = System::Drawing::Point(1673, 688);
+			this->ML_button->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->ML_button->Name = L"ML_button";
-			this->ML_button->Size = System::Drawing::Size(110, 29);
+			this->ML_button->Size = System::Drawing::Size(165, 45);
 			this->ML_button->TabIndex = 1;
 			this->ML_button->Text = L"MultiLoad";
-			this->ML_button->UseVisualStyleBackColor = true;
+			this->ML_button->UseVisualStyleBackColor = false;
 			this->ML_button->Click += gcnew System::EventHandler(this, &MultiLoader::ML_button_Click);
 			// 
 			// openFileDialog2
@@ -340,12 +360,24 @@ namespace MultiLoader {
 			this->openFileDialog2->InitialDirectory = L"C:\\";
 			this->openFileDialog2->Title = L"Выберите изображение";
 			// 
+			// label3
+			// 
+			this->label3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->label3->AutoSize = true;
+			this->label3->BackColor = System::Drawing::SystemColors::Window;
+			this->label3->Location = System::Drawing::Point(12, 733);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(125, 20);
+			this->label3->TabIndex = 29;
+			this->label3->Text = L"MultiLoader v1.0";
+			// 
 			// MultiLoader
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->ClientSize = System::Drawing::Size(1519, 747);
+			this->ClientSize = System::Drawing::Size(1878, 762);
+			this->Controls->Add(this->label3);
 			this->Controls->Add(this->tag_button);
 			this->Controls->Add(this->tag_text);
 			this->Controls->Add(this->checkBox_pl);
@@ -364,9 +396,11 @@ namespace MultiLoader {
 			this->Controls->Add(this->checkBox_yt);
 			this->Controls->Add(this->ML_button);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->Name = L"MultiLoader";
 			this->Text = L"MultiLoader";
 			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+			this->Load += gcnew System::EventHandler(this, &MultiLoader::MultiLoader_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -387,6 +421,19 @@ namespace MultiLoader {
 	private: void CopyToClipboard(String^ text) {
 		Clipboard::SetText(text);
 	}
+
+	/*private: void ShowPopup()
+    {
+        if (pw == nullptr || pw->IsDisposed)
+        {
+			pw = gcnew ProgressWindow();
+            pw->Show();
+        }
+        else
+        {
+            pw->BringToFront();
+        }
+    }*/
 
 	private: void ytLoad(IUIAutomation *pAutomation) {
 		ShellExecute(NULL, TEXT("open"), TEXT("https://studio.youtube.com/"), NULL, NULL, SW_MAXIMIZE);
@@ -436,17 +483,38 @@ namespace MultiLoader {
 
 		if (this->picture_link != "default")
 		{
-			pressTab();
-			pressTab();
+			ClickElementByName(pAutomation, pRoot, L"Загрузить файл");
 			EmptyClipboard();
 			CopyToClipboard(this->picture_link);
-			pressEnter();
 			WaitForFileDialog(360);
 			Sleep(500);
 			pasteText();
 			Sleep(200);
 			pressEnter();
 			Sleep(1000);
+		}
+
+		if (!String::IsNullOrWhiteSpace(this->tag_text->Text))
+		{
+			HWND hwnd = GetForegroundWindow();
+			SendMessage(hwnd, WM_KEYDOWN, VK_END, 0);
+			ClickElementByName(pAutomation, pRoot, L"Развернуть");
+			pressTab();
+			pressTab();
+			pressTab();
+			pressTab();
+			pressTab();
+			pressTab();
+			pressTab();
+			pressTab();
+			pressTab();
+			pressTab();
+			pressTab();
+			pressTab();
+			pressTab();
+			EmptyClipboard();
+			CopyToClipboard(this->tag_text->Text);
+			pasteText();
 		}
 
 		ClickElementByName(pAutomation, pRoot, L"Далее");
@@ -471,7 +539,7 @@ namespace MultiLoader {
 		pAutomation->GetRootElement(&pRoot);
 
 		if (WaitForElement(pAutomation, pRoot, L"Главное", 360)) {
-			ClickAtPosition(1505, 150);
+			ClickRelative(0.78, 0.139);
 		}
 		if (WaitForElement(pAutomation, pRoot, L"Загрузить видео", 60)) {
 			ClickElementByName(pAutomation, pRoot, L"Загрузить видео");
@@ -558,6 +626,7 @@ namespace MultiLoader {
 		pressEnter();
 
 		if (WaitForElement(pAutomation, pRoot, L"Название", 360)) {
+			Sleep(500);
 			pressTab();
 			pressTab();
 			if (this->name != "default")
@@ -584,16 +653,18 @@ namespace MultiLoader {
 			ClickElementByName(pAutomation, pRoot, L"Загрузить свою");
 			EmptyClipboard();
 			CopyToClipboard(this->picture_link);
-			pressEnter();
 			WaitForFileDialog(360);
-			Sleep(500);
+			Sleep(1000);
 			pasteText();
 			Sleep(200);
 			pressEnter();
 			Sleep(1000);
 		}
 
-		ClickElementByName(pAutomation, pRoot, L"Добавить");
+		if (WaitForElement(pAutomation, pRoot, L"Обложка", 60)) {
+			Sleep(2000);
+			ClickRelative(0.65, 0.76);
+		}
 
 		if (WaitForElement(pAutomation, pRoot, L"Опубликовать", 3600)) {
 			ClickElementByName(pAutomation, pRoot, L"Опубликовать");
@@ -693,7 +764,14 @@ namespace MultiLoader {
 		Sleep(200);
 		pressEnter();
 
-		if (WaitForElement(pAutomation, pRoot, L"Описание", 360)) {
+		Sleep(5000);
+		pressTab();
+		clearText();
+		EmptyClipboard();
+		CopyToClipboard(this->name);
+		pasteText();
+
+		/*if (WaitForElement(pAutomation, pRoot, L"Описание", 360)) {
 			if (this->name != "default")
 			{
 				ClickAtPosition(660, 360);
@@ -703,7 +781,7 @@ namespace MultiLoader {
 				pasteText();
 				Sleep(1000);
 			}
-		}
+		}*/
 
 		if (this->description != "default")
 		{
@@ -753,12 +831,13 @@ namespace MultiLoader {
 			IID_IUIAutomation,
 			(void**)&pAutomation
 		);
-
+		//ShowPopup();
 		if (this->checkBox_yt->Checked == true) ytLoad(pAutomation);
 		if (this->checkBox_ya->Checked == true) yaLoad(pAutomation);
 		if (this->checkBox_ru->Checked == true) ruLoad(pAutomation);
-		if (this->checkBox_vk->Checked == true) vkLoad(pAutomation);
 		if (this->checkBox_pl->Checked == true) plLoad(pAutomation);
+		if (this->checkBox_vk->Checked == true) vkLoad(pAutomation);
+		
 
 		pAutomation->Release();
 		CoUninitialize();
@@ -841,6 +920,25 @@ namespace MultiLoader {
 			description_text->ForeColor = Color::Gray;
         }
     }
+
+	private: System::Void On_tag_text_GotFocus(Object^ sender, EventArgs^ e)
+    {
+		if (tag_text->Text == "Тэги")
+        {
+            tag_text->Text = "";
+            tag_text->ForeColor = Color::Black;
+        }
+    }
+
+	private: System::Void On_tag_text_LostFocus(Object^ sender, EventArgs^ e)
+    {
+        if (String::IsNullOrWhiteSpace(tag_text->Text))
+        {
+			tag_text->Text = "Тэги";
+			tag_text->ForeColor = Color::Gray;
+        }
+    }
+
 	private: System::Void file_button_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (openFileDialog1->ShowDialog() == Windows::Forms::DialogResult::OK)
 		{
@@ -861,6 +959,7 @@ namespace MultiLoader {
 			{
 				message += file;
 			}
+			this->picture_button->Image = Image::FromFile(message);
 			this->picture_link = message;
 		}
 	}
@@ -873,5 +972,7 @@ namespace MultiLoader {
 	private: System::Void description_text_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->description = this->description_text->Text;
 	}
+private: System::Void MultiLoader_Load(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
